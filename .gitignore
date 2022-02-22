@@ -1,0 +1,6 @@
+/node_modules
+/dist
+vue.config.js
+.cache
+.temp
+.DS_Store

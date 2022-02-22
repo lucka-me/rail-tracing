@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v2.4.1
+        with:
+          node-version: 14.x
+      - name: Initiate
+        run: npm ci
+      - name: Build RailTracing
+        run: npm run build

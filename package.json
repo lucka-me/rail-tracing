@@ -1,0 +1,45 @@
+{
+  "name": "rail-tracing",
+  "version": "1.0.0",
+  "description": "Generate trace along railways",
+  "scripts": {
+    "postinstall": "tsc -m commonjs --esModuleInterop vue.config.ts",
+    "prestart": "tsc -m commonjs --esModuleInterop vue.config.ts",
+    "start": "vue-cli-service serve",
+    "prebuild": "tsc -m commonjs --esModuleInterop vue.config.ts",
+    "build": "vue-cli-service build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lucka-me/rail-tracing.git"
+  },
+  "author": "lucka-me",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@lucka-labs/eli": "^0.1.2",
+    "@placemarkio/tokml": "^0.2.2",
+    "@turf/turf": "^6.5.0",
+    "mapbox-gl": "^2.5.1",
+    "material-components-web": "^13.0.0",
+    "register-service-worker": "^1.7.2",
+    "vue": "^3.2.20",
+    "vue-class-component": "^8.0.0-rc.1",
+    "vue-i18n": "^9.1.9",
+    "vue-property-decorator": "^10.0.0-rc.3"
+  },
+  "devDependencies": {
+    "@types/mapbox-gl": "^2.4.2",
+    "@types/webpack-bundle-analyzer": "^3.9.2",
+    "@vue/cli-plugin-pwa": "^4.5.14",
+    "@vue/cli-plugin-typescript": "^4.5.14",
+    "@vue/cli-service": "^4.5.14",
+    "@vue/compiler-sfc": "^3.2.20",
+    "sass": "^1.34.0",
+    "sass-loader": "^10.1.0",
+    "ts-node": "^10.3.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.4",
+    "webpack-bundle-analyzer": "^4.4.2"
+  }
+}

@@ -1,0 +1,66 @@
+{
+    "en": {
+        "stage": {
+            "idle": "Idle",
+            "selectFirstLine": "Select first line",
+            "selectDirection": "Select direction",
+            "searchNext": "Searching next line",
+            "selectNext": "Select next line",
+            "confirmNext": "Confirm next line",
+            "selectReversePosition": "Select reverse position",
+            "confirmReversePosition": "Confirm reverse position",
+            "selectEnd": "Select end",
+            "confirmEnd": "Confirm end",
+            "confirmClear": "Confirm clear",
+            "unknown": "Unknown"
+        },
+
+        "start": "Start",
+        "confirm": "Confirm",
+        "selectNext": "Select Next",
+        "reverse": "Reverse",
+        "selectEnd": "Select End",
+        "cancel": "Cancel",
+        "save": "Save",
+        "load": "Load",
+        "export": "Export",
+        "removeLastPoint": "Remove Last Point",
+        "clearTrace": "Clear Trace",
+
+        "autoConfirmNext": "Auto Confirm Next",
+        "angleDiffThreshold": "Angle Diff Threshold",
+        "satelliteLayerOpacity": "Satellite Layer Opacity"
+    },
+    "zh": {
+        "stage": {
+            "idle": "空闲",
+            "selectFirstLine": "选择第一条线",
+            "selectDirection": "选择方向",
+            "searchNext": "搜索下一条线",
+            "selectNext": "选择下一条线",
+            "confirmNext": "确认下一条线",
+            "selectReversePosition": "选择换向位置",
+            "confirmReversePosition": "确认换向位置",
+            "selectEnd": "选择终点",
+            "confirmEnd": "确认终点",
+            "confirmClear": "确认清空",
+            "unknown": "未知"
+        },
+
+        "start": "开始",
+        "confirm": "确认",
+        "selectNext": "选择下一条线",
+        "reverse": "换向",
+        "selectEnd": "选择终点",
+        "cancel": "取消",
+        "save": "保存",
+        "load": "加载",
+        "export": "导出",
+        "removeLastPoint": "移除最后一个点",
+        "clearTrace": "清空轨迹",
+
+        "autoConfirmNext": "自动确认下一条线",
+        "angleDiffThreshold": "角度差阈值",
+        "satelliteLayerOpacity": "卫星图层透明度"
+    }
+}
