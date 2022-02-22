@@ -1,8 +1,7 @@
 # RailTracing
 
 [![CD Status](https://img.shields.io/github/workflow/status/lucka-me/rail-tracing/CD?label=CD&logo=github-actions&logoColor=white)](https://github.com/lucka-me/rail-tracing/actions/workflows/cd.yml "CD Workflow")
-[![Release](https://img.shields.io/github/v/release/lucka-me/rail-tracing)](https://github.com/lucka-me/rail-tracing/releases/latest "Last release")
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Flucka.moe%2Frail-tracing)](https://lucka.moe/rail-tracing "Website")
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Flucka.moe%2Frail-tracing%2F)](https://lucka.moe/rail-tracing/ "Website")
 [![Lines of code](https://img.shields.io/tokei/lines/github/lucka-me/rail-tracing)](https://github.com/lucka-me/rail-tracing "Repository")
 [![License](https://img.shields.io/github/license/lucka-me/rail-tracing)](./LICENSE "License")
 
