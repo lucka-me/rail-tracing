@@ -1,4 +1,3 @@
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { ProjectOptions } from '@vue/cli-service';
 
 const publicPath = '/rail-tracing/';
@@ -33,14 +32,6 @@ const options: ProjectOptions = {
                 }
             ]
         }
-    },
-    chainWebpack: config => {
-        config
-            .plugin('bundle-analyzer')
-            .use(BundleAnalyzerPlugin)
-            .init((Plugin: typeof BundleAnalyzerPlugin) => new Plugin({
-                analyzerMode: 'static', openAnalyzer: false
-            }));
     },
 };
 
