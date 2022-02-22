@@ -14,13 +14,11 @@ A web app to generate trace along railways.
 ```sh
 $ git checkout main
 $ npm i
+$ npm run config # Compile vue.config.js
 $ npm start
 ```
 
 Open `http://localhost:8080/rail-tracing/` in browser.
-
-## Changelog
-See [CHANGELOG.md](./CHANGELOG.md).
 
 ## License
 The source code are [licensed under MIT](./LICENSE).

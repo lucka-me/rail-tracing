@@ -18,4 +18,5 @@ jobs:
       - name: Initiate
         run: npm ci
       - name: Build RailTracing
+        run: npm run config
         run: npm run build
