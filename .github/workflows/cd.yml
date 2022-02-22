@@ -16,8 +16,9 @@ jobs:
       - name: Initiate
         run: npm ci
       - name: Build RailTracing
-        run: npm run config
-        run: npm run build
+        run: |
+          npm run config
+          npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.8.0
         with:
