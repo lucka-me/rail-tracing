@@ -429,7 +429,7 @@ html {
     height: calc(100% + env(safe-area-inset-top, 0));
 }
 
-body, #app {
+body, #app, main {
     margin: 0;
     height: 100%;
     min-height: 100%;
@@ -438,27 +438,5 @@ body, #app {
 
 #app {
     @include typography.base();
-    display: flex;
-    flex-flow: column nowrap;
-
-    > main {
-        flex: 1;
-
-        display: flex;
-        flex-flow: column nowrap;
-
-        @media screen and (min-width: 600px) {
-            flex-flow: row nowrap;
-            min-height: 0%;
-        }
-
-        .map-container {
-            flex: 2;
-        }
-
-        .controller {
-            flex: 1;
-        }
-    }
 }
 </style>

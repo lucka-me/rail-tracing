@@ -1,17 +1,25 @@
 <template>
-<button class="mdc-button mdc-button--outlined">
+<button :class="buttonClassName">
     <span class="mdc-button__ripple"></span>
+    <span class="mdc-button__focus-ring"></span>
     <span class="mdc-button__label"><slot/></span>
 </button>
 </template>
 
 <script lang="ts">
 import { MDCRipple } from '@material/ripple';
-import { Vue } from 'vue-property-decorator';
+import { Prop, Vue } from 'vue-property-decorator';
 
 export default class MaterialButton extends Vue {
 
+    @Prop(Boolean) readonly outlined?: boolean;
+
     private ctrl?: MDCRipple;
+
+    get buttonClassName() : string {
+        console.log(this.outlined);
+        return `mdc-button ${this.outlined ? 'mdc-button--outlined' : ''}`
+    }
 
     mounted() {
         this.ctrl = MDCRipple.attachTo(this.$el);

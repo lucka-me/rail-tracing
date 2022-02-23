@@ -15,6 +15,9 @@
             "unknown": "Unknown"
         },
 
+        "more": "More",
+        "less": "Less",
+
         "start": "Start",
         "confirm": "Confirm",
         "selectNext": "Select Next",
@@ -46,6 +49,9 @@
             "confirmClear": "确认清空",
             "unknown": "未知"
         },
+
+        "more": "更多",
+        "less": "更少",
 
         "start": "开始",
         "confirm": "确认",

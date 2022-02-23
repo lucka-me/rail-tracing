@@ -1,25 +1,27 @@
 <template>
-<div class="controller">
-    <div class="stage">
+<material-card class="panel">
+    <div class="row">
         <span>{{ $t(`stage.${stageText}`) }}</span>
+        <div class="spacer"/>
+        <material-button @click="onClickMoreLess">{{ moreLessButtonText }}</material-button>
     </div>
     <div class="divider"/>
     <div class="commands">
-        <material-button v-if="idle" @click="onClickStart">{{ $t('start') }}</material-button>
-        <material-button v-if="confirming" @click="onClickConfirm">{{ $t('confirm') }}</material-button>
-        <material-button v-if="idle && traceNotEmpty" @click="onClickSelectNext">{{ $t('selectNext') }}</material-button>
-        <material-button v-if="idle && traceNotEmpty" @click="onClickReverse">{{ $t('reverse') }}</material-button>
-        <material-button v-if="idle && traceNotEmpty" @click="onClickSelectEnd">{{ $t('selectEnd') }}</material-button>
-        <material-button v-if="!idle" @click="onClickCancel">{{ $t('cancel') }}</material-button>
+        <material-button outlined v-if="idle" @click="onClickStart">{{ $t('start') }}</material-button>
+        <material-button outlined v-if="confirming" @click="onClickConfirm">{{ $t('confirm') }}</material-button>
+        <material-button outlined v-if="idle && traceNotEmpty" @click="onClickSelectNext">{{ $t('selectNext') }}</material-button>
+        <material-button outlined v-if="idle && traceNotEmpty" @click="onClickReverse">{{ $t('reverse') }}</material-button>
+        <material-button outlined v-if="idle && traceNotEmpty" @click="onClickSelectEnd">{{ $t('selectEnd') }}</material-button>
+        <material-button outlined v-if="!idle" @click="onClickCancel">{{ $t('cancel') }}</material-button>
     </div>
     <div class="commands" v-if="idle">
-        <material-button v-if="traceNotEmpty" @click="onClickSave">{{ $t('save') }}</material-button>
-        <material-button @click="onClickLoad">{{ $t('load') }}</material-button>
-        <material-button v-if="traceNotEmpty" @click="onClickExport">{{ $t('export') }}</material-button>
+        <material-button outlined v-if="traceNotEmpty" @click="onClickSave">{{ $t('save') }}</material-button>
+        <material-button outlined @click="onClickLoad">{{ $t('load') }}</material-button>
+        <material-button outlined v-if="traceNotEmpty" @click="onClickExport">{{ $t('export') }}</material-button>
     </div>
     <div class="commands" v-if="idle && traceNotEmpty">
-        <material-button @click="onClickRemoveLast">{{ $t('removeLastPoint') }}</material-button>
-        <material-button @click="onClickClear">{{ $t('clearTrace') }}</material-button>
+        <material-button outlined @click="onClickRemoveLast">{{ $t('removeLastPoint') }}</material-button>
+        <material-button outlined @click="onClickClear">{{ $t('clearTrace') }}</material-button>
     </div>
     <div class="divider"/>
     <div class="row">
@@ -27,7 +29,7 @@
         <div class="spacer"/>
         <material-switch v-model="autoConfirmNextValue"/>
     </div>
-    <div>
+    <div v-if="showMore">
         <div>{{ $t('angleDiffThreshold') }}</div>
         <material-slider
             v-model="angleDiffThresholdValue"
@@ -37,7 +39,7 @@
             name="angle-diff-threshold"
         />
     </div>
-    <div>
+    <div v-if="showMore">
         <div>{{ $t('satelliteLayerOpacity') }}</div>
         <material-slider
             v-model="satelliteLayerOpacityValue"
@@ -45,17 +47,18 @@
             name="satellite-layer-opacity"
         />
     </div>
-    <div class="footer">
+    <div class="footer" v-if="showMore">
         <div>RailTracing</div>
         <div>Lucka | <a href="https://github.com" title="GitHub" target="_blank" rel="noopener">Code</a></div>
     </div>
-</div>
+</material-card>
 </template>
 
 <script lang="ts">
 import { Vue, Options, Prop, Model } from 'vue-property-decorator';
 
 import MaterialButton from '@/components/material/Button.vue';
+import MaterialCard from '@/components/material/Card.vue';
 import MaterialSlider from '@/components/material/Slider.vue';
 import MaterialSwitch from '@/components/material/Switch.vue';
 
@@ -79,7 +82,7 @@ export enum PanelCommand {
 
 @Options({
     components: {
-        MaterialButton, MaterialSwitch, MaterialSlider
+        MaterialButton, MaterialCard, MaterialSlider, MaterialSwitch
     },
     emits: [ 'command' ],
     i18n: {
@@ -93,6 +96,8 @@ export default class Panel extends Vue {
     @Model('satelliteLayerOpacity', Number) readonly satelliteLayerOpacityValue!: number;
     @Prop(Number) readonly stage!: Stage;
     @Prop(Array) readonly trace! : Array<GeoJSON.Position>;
+
+    showMore: boolean = false;
 
     get stageText(): string {
         switch (this.stage) {
@@ -115,6 +120,10 @@ export default class Panel extends Vue {
 
             default:    return 'unknown';
         }
+    }
+
+    get moreLessButtonText() : string {
+        return this.$t(this.showMore ? 'less' : 'more');
     }
 
     get idle() : boolean {
@@ -144,6 +153,10 @@ export default class Panel extends Vue {
     onClickSelectNext   = () => this.emitCommand(PanelCommand.selectNext);
     onClickStart        = () => this.emitCommand(PanelCommand.start     );
 
+    onClickMoreLess() {
+        this.showMore = !this.showMore;
+    }
+
     private emitCommand(command: PanelCommand) {
         this.$emit('command', command);
     }
@@ -154,87 +167,86 @@ export default class Panel extends Vue {
 @use '~@material/theme';
 @use '~@material/typography';
 
-.controller {
-    display: flex;
-    flex-flow: column nowrap;
-    scroll-behavior: smooth;
+.panel {
+    z-index: 100;
+    position: fixed;
+    left: calc(10px + env(safe-area-inset-left, 0));
+    right: calc(10px + env(safe-area-inset-right, 0));
+    bottom: calc(50px + env(safe-area-inset-bottom, 0));
+    max-height: 30%;
 
-    overflow-y: auto;
-
-    > * {
-        flex: 0 0 auto;
-        margin-left: max(env(safe-area-inset-left), 1rem);
-        margin-right: max(env(safe-area-inset-right), 1rem);
-        @media screen and (min-width: 600px) {
-            margin-left: 1rem;
-        }
+    @media screen and (min-width: 600px) {
+        top: calc(10px + env(safe-area-inset-top, 0));
+        right: unset;
+        bottom: unset;
+        width: 40%;
+        max-width: 25rem;
+        max-height: calc(100% - 50px - env(safe-area-inset-top, 0) - env(safe-area-inset-bottom, 0));
     }
 
-    > :first-child {
-        margin-top: 1rem;
-        @media screen and (min-width: 600px) {
-            margin-top: max(env(safe-area-inset-top), 1rem);
-        }
-    }
-
-    > :last-child {
-        margin-bottom: max(env(safe-area-inset-bottom), 1rem);
-    }
-
-    > :not(:first-child) {
-        margin-top: 0.2rem;
-    }
-
-    > .stage {
-        display: flex;
-        flex-flow: row-reverse nowrap;
-    }
-
-    > .divider {
-        border-block-end: 1px solid;
-        @include theme.property(border-inline-end-color, text-secondary-on-light);
-        margin-block-start: 0.4rem;
-        margin-block-end: 0.4rem;
-    }
-
-    > .commands {
-        display: flex;
-        flex-flow: row wrap;
-
-        > * {
-            margin-top: 0.15rem;
-            margin-bottom: 0.15rem;
-        }
-    }
-
-    > .row {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: baseline;
-
-        overflow: hidden;
-
-        > span {
-            @include typography.overflow-ellipsis;
-        }
-
-        > .spacer {
-            flex: 1;
-            min-width: 0.5rem;
-        }
-    }
-
-    > .footer {
-        @include typography.typography(overline);
-
+    .mdc-card__content {
         display: flex;
         flex-flow: column nowrap;
-        align-items: center;
-        text-align: center;
+        scroll-behavior: smooth;
 
-        a {
-            @include theme.property(color, text-primary-on-light);
-            text-decoration: none;
+        padding: 1rem;
+
+        overflow-y: auto;
+
+        > * {
+            flex: 0 0 auto;
+        }
+
+        > :not(:first-child) {
+            margin-top: 0.2rem;
+        }
+
+        > .divider {
+            border-block-end: 1px solid;
+            @include theme.property(border-inline-end-color, text-secondary-on-light);
+            margin-block-start: 0.4rem;
+            margin-block-end: 0.4rem;
+        }
+
+        > .commands {
+            display: flex;
+            flex-flow: row wrap;
+
+            > * {
+                margin-top: 0.15rem;
+                margin-bottom: 0.15rem;
+            }
+        }
+
+        > .row {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+
+            overflow: hidden;
+
+            > span {
+                @include typography.overflow-ellipsis;
+            }
+
+            > .spacer {
+                flex: 1;
+                min-width: 0.5rem;
+            }
+        }
+
+        > .footer {
+            @include typography.typography(overline);
+
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            text-align: center;
+
+            a {
+                @include theme.property(color, text-primary-on-light);
+                text-decoration: none;
+            }
         }
     }
 }

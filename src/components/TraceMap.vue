@@ -205,29 +205,28 @@ function pointBuffer(point: mapboxgl.Point) : [ mapboxgl.Point, mapboxgl.Point ]
 
 <style lang="scss">
 .map-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
 
     // Adjust for safe area
     .mapboxgl-control-container {
         > .mapboxgl-ctrl-top-left, > .mapboxgl-ctrl-bottom-left {
-            margin-left: env(safe-area-inset-left);
+            margin-left: env(safe-area-inset-left, 0);
         }
 
         > .mapboxgl-ctrl-top-left, > .mapboxgl-ctrl-top-right {
-            margin-top: env(safe-area-inset-top);
+            margin-top: env(safe-area-inset-top, 0);
         }
 
         > .mapboxgl-ctrl-top-right, > .mapboxgl-ctrl-bottom-right {
-            margin-right: env(safe-area-inset-right);
+            margin-right: env(safe-area-inset-right, 0);
         }
 
-        @media screen and (min-width: 600px) {
-            > .mapboxgl-ctrl-top-right, > .mapboxgl-ctrl-bottom-right {
-                margin-right: 0;
-            }
-
-            > .mapboxgl-ctrl-bottom-left, > .mapboxgl-ctrl-bottom-right {
-                margin-bottom: env(safe-area-inset-bottom);
-            }
+        > .mapboxgl-ctrl-bottom-left, > .mapboxgl-ctrl-bottom-right {
+            margin-bottom: env(safe-area-inset-bottom, 0);
         }
     }
 }
