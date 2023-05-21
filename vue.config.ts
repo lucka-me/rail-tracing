@@ -1,6 +1,6 @@
 import { ProjectOptions } from '@vue/cli-service';
 
-const publicPath = '/rail-tracing/';
+const publicPath = '/';
 
 const options: ProjectOptions = {
     publicPath: publicPath,
